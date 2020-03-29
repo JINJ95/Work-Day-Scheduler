@@ -1,26 +1,24 @@
-// Current Date + Time
+// Current Date 
 var m = moment();
-//console.log(m);
 var date = m.format("dddd[,] MMM Do YYYY");
 var currentDay = $("#currentDay");
 currentDay.text(date);
 
+// Hour blocks to create moment objects with specific times of the day
 var blockHours = ["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00"];
+
 // function to check if moment objects for time blocks are before or after current time
 function timeCheck (blockHour,m) {
     var currentDate = m.format("YYYY-MM-DD ");
     var temp = moment(currentDate + blockHour);
     if (temp.isBefore(m, "hour")){
-        console.log(blockHour + " is Before hour of current time");
-        //$("textarea").addClass("past");
+        //console.log(blockHour + " is Before hour of current time");
         document.getElementById(blockHour).classList.add("past");
     }else if (temp.isAfter(m, "hour")){
-        console.log(blockHour + " is After hour of current time");
-        //$("textarea").addClass("present");
+        //console.log(blockHour + " is After hour of current time");
         document.getElementById(blockHour).classList.add("future");
     }else if (temp.isSame(m, "hour")){
-        console.log(blockHour + " is Same hour of current time");
-        //$("textarea").addClass("future");
+        //console.log(blockHour + " is Same hour of current time");
         document.getElementById(blockHour).classList.add("present");
     }
 }
@@ -30,49 +28,76 @@ for(i = 0; i < blockHours.length; i++){
 timeCheck(blockHours[i],m);
 }
 
+// -> collect user information and display
+var savedActivity = localStorage.getItem("9am");
+$(".9am").html(savedActivity);
 
-//       -> collect user information 
-var savedActivity = localStorage.getItem("input");
-$("#userInput").html(savedActivity);
+var tenAmText = localStorage.getItem("10am");
+$(".10am").html(tenAmText);
 
-//     * save button
-//       -> stores the activity in local storage
+var elevenAmText = localStorage.getItem("11am");
+$(".11am").html(elevenAmText);
+
+var twelvePmText = localStorage.getItem("12pm");
+$(".12pm").html(twelvePmText);
+
+var onePmText = localStorage.getItem("1pm");
+$(".1pm").html(onePmText);
+
+var twoPmText = localStorage.getItem("2pm");
+$(".2pm").html(twoPmText);
+
+var threePmText = localStorage.getItem("3pm");
+$(".3pm").html(threePmText);
+
+var fourPmText = localStorage.getItem("4pm");
+$(".4pm").html(fourPmText);
+
+var fivePmText = localStorage.getItem("5pm");
+$(".5pm").html(fivePmText);
+
+// Save button -> stores the activity in local storage
 $("#9amBtn").on("click", function () {
-    var text9am = $("#userInput").val();
-    localStorage.setItem("input",text9am);
-    console.log(localStorage.getItem("input"));
+    var text9am = $(".9am").val();
+    localStorage.setItem("9am",text9am);
 });
 
-//         -> stores *EACH* activity in local storage
-//         -> how can i make sure i don't overwrite what's already in there?
-//         -> i can turn objects into strings with `JSON.stringify()`
-//       -> store the time in local storage
-// // display time blocks
-// ​
-// // color code the activity
-// -> get the current time
-var currentTime = m.format("LT");
-console.log(currentTime);
-console.log(m);
+$("#ten").on("click", function () {
+    var text = $(".10am").val();
+    localStorage.setItem("10am",text);
+});
 
-// -> compare time block against current time
-//     ??? investigate `Moment.js` -- how to get CURRENT TIME?
-//     * condition for past event
+$("#eleven").on("click", function () {
+    var text = $(".11am").val();
+    localStorage.setItem("11am",text);
+});
 
-// //created a moment object for 9 A.M
-//var temp = moment($(".9am").attr("data-time"), "hh:mm a");
-//console.log(temp);
-// console.log(nineAm.isSame("9:00 am"));
+$("#twelve").on("click", function () {
+    var text = $(".12pm").val();
+    localStorage.setItem("12pm", text);
+});
 
-//     * condition for present event
-//     * condition for future event
-// ​
-// ON REFRESH
-// -> time blocks should populate with local storage data
-//     * retrieve data from local storage
-//     * differentiate times
-//     * display local storage data on the screen
-// ​
-// time | activity | save button
-// -> when we hit save,
-//     storing the time and activity in local storage
+$("#one").on("click", function () {
+    var text = $(".1pm").val();
+    localStorage.setItem("1pm",text);
+});
+
+$("#two").on("click", function () {
+    var text = $(".2pm").val();
+    localStorage.setItem("2pm",text);
+});
+
+$("#three").on("click", function () {
+    var text = $(".3pm").val();
+    localStorage.setItem("3pm",text);
+});
+
+$("#four").on("click", function () {
+    var text = $(".4pm").val();
+    localStorage.setItem("4pm",text);
+});
+
+$("#five").on("click", function () {
+    var text = $(".5pm").val();
+    localStorage.setItem("5pm",text);
+})
